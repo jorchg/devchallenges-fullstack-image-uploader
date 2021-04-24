@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Uploader from '../components/Uploader';
+import Loader from '../components/Loader';
 
 export default function Home() {
+  const [uploading, setUploading] = useState(false);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +17,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.homepage}>
-        <Uploader />
+        {uploading ? 
+          <Loader /> :
+          <Uploader setUploading={setUploading} />
+        }
       </main>
     </div>
   )

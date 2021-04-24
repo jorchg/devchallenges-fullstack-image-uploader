@@ -2,10 +2,11 @@ import { useRef } from 'react'
 import { post } from 'axios'
 import styles from '../styles/Uploader.module.css'
 
-export default function Uploader() {
+export default function Uploader(props) {
   const fileInput = useRef(null)
 
   function handleUpload() {
+    props.setUploading(true)
     const file = fileInput.current.files[0]
     const UPLOAD_URL = '/api/upload'
     const formData = new FormData()
