@@ -11,7 +11,7 @@ export default function Uploaded(props) {
       </div>
       <div className={styles.link}>
         <div className={styles.input}>
-          <span>{props.imageURL && `https://localhost:3000${props.imageURL}`}</span>
+          <span>{props.imageURL && `http://localhost:3000${props.imageURL}`}</span>
           <button className={styles.copy}>Copy Link</button>
         </div>
       </div>
