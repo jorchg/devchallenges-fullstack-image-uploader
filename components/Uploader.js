@@ -5,7 +5,7 @@ import styles from '../styles/Uploader.module.css'
 export default function Uploader(props) {
   const fileInput = useRef(null)
 
-  function handleUpload() {
+  async function handleUpload() {
     props.setUploading(true)
     const file = fileInput.current.files[0]
     const UPLOAD_URL = '/api/upload'
@@ -16,7 +16,14 @@ export default function Uploader(props) {
         'content-type': 'multipart/form-data'
       }
     }
-    return post(UPLOAD_URL, formData, config)
+    const response = await post(UPLOAD_URL, formData, config)
+    if (response.status === 200) {
+      setTimeout(() => {
+        props.setUploading(false)
+        props.setUploaded(true)
+        props.setImageURL(response.data.files.file.path.replace('public', ''));
+      }, 2500);
+    }
   }
 
   return (
